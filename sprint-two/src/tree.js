@@ -28,14 +28,13 @@ treeMethods.contains = function(target){
     } else {
       if (tree.children === []) {return false;}
       for (var i = 0; i < tree.children.length; i++){
-        if(recursiveSearch(target, tree.children[i]){
+        if(recursiveSearch(target, tree.children[i])){
           return true;
         }
       }
       return false;
     }
   };
-  console.log(this);
   return recursiveSearch(target, this);
 };
 
