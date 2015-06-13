@@ -5,12 +5,10 @@ var Graph = function(){
 
 Graph.prototype.addNode = function(node){
   this[node] = {};
-  //debugger;
 };
 
 Graph.prototype.contains = function(node){
   var keys = Object.keys(this);
-  //debugger;
   for(var i = 0; i < keys.length; i++){
     if(keys[i] === node){
       return true;
@@ -50,7 +48,6 @@ Graph.prototype.removeEdge = function(fromNode, toNode){
 
 Graph.prototype.forEachNode = function(cb){
   var nodes = Object.keys(this);
-  debugger;
   for(var i = 0; i < nodes.length; i++){
     cb(nodes[i]);
   }
