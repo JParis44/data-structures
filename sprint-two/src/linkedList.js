@@ -3,6 +3,7 @@ var LinkedList = function(){
   list.head = null;
   list.tail = null;
 
+    //Time Complexity: O(1)
   list.addToTail = function(value){
     if(list.head === null){
       list.head = Node(value);
@@ -13,12 +14,14 @@ var LinkedList = function(){
     }
   };
 
+    //Time Complexity: O(1)
   list.removeHead = function(){
     var value = list.head.value;
     list.head = list.head.next;
     return value;
   };
 
+    //Time Complexity: O(n)
   list.contains = function(target){
     var recursiveSearch = function(target, node){
       if (node.value === target) {

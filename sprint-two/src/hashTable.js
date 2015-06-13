@@ -6,6 +6,7 @@ var HashTable = function(){
   };
 };
 
+    //Time Complexity: O(n/k)
 HashTable.prototype.insert = function(key, val){
   var i = getIndexBelowMaxForKey(key, this._limit);
   var subArray = this._storage.get(i);
@@ -23,6 +24,7 @@ HashTable.prototype.insert = function(key, val){
 
 };
 
+    //Time Complexity: O(n/k)
 HashTable.prototype.retrieve = function(key){
   var i = getIndexBelowMaxForKey(key, this._limit);
   var subArray = this._storage.get(i);
@@ -40,6 +42,7 @@ HashTable.prototype.retrieve = function(key){
   }
 };
 
+    //Time Complexity: O(n/k)
 HashTable.prototype.remove = function(key){
   var i = getIndexBelowMaxForKey(key, this._limit);
   var subArray = this._storage.get(i);
@@ -51,10 +54,9 @@ HashTable.prototype.remove = function(key){
     }
   }, -1);
   if(index !== -1) {
-        this._storage.set(i, subArray.splice(index, 1));
-        var whatTheHell = this._storage.get(i);
+        subArray.splice(index, 1);
+        this._storage.set(i, subArray);
   }
-  debugger;
 };
 
 

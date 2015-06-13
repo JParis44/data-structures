@@ -15,12 +15,14 @@ var Tree = function(value){
 
 var treeMethods = {};
 
+    //Time Complexity: O(1)
 treeMethods.addChild = function(value){
   this.children.push(Tree(value));
 
 
 };
 
+    //Time Complexity: O(n)
 treeMethods.contains = function(target){
   var recursiveSearch = function(target, tree){
     if (tree.value === target) {
