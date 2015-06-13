@@ -10,18 +10,19 @@ var HashTable = function(){
 HashTable.prototype.insert = function(key, val){
   var i = getIndexBelowMaxForKey(key, this._limit);
   var subArray = this._storage.get(i);
-  var contains = subArray.reduce(function(accumulator, item, index){
-    if(item[0] === key || accumulator){
-      return true;;
+  var index = subArray.reduce(function(accumulator, item, index){
+    if(item[0] === key){
+      return index;
     } else {
-      return false;
+      return accumulator;
     }
-  }, false);
-  if(!contains) {
+  }, -1);
+  if(index !== -1) {
+    subArray[index][1] = val;
+  } else {
     subArray.push([key, val]);
-    this._storage.set(i, subArray);
   }
-
+    this._storage.set(i, subArray);
 };
 
     //Time Complexity: O(n/k)
