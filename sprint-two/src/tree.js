@@ -1,6 +1,7 @@
-var Tree = function(value){
+var Tree = function(value, parent){
   var newTree = {};
   newTree.value = value;
+  newTree.parent = parent || null;
 
   // your code here
   newTree.children = [];  // fixed
@@ -24,20 +25,17 @@ treeMethods.addChild = function(value){
 
     //Time Complexity: O(n)
 treeMethods.contains = function(target){
-  var recursiveSearch = function(target, tree){
-    if (tree.value === target) {
+    if (this.value === target) {
       return true
     } else {
-      if (tree.children === []) {return false;}
-      for (var i = 0; i < tree.children.length; i++){
-        if(recursiveSearch(target, tree.children[i])){
+      if (this.children === []) {return false;}
+      for (var i = 0; i < this.children.length; i++){
+        if(this.contains.call(this.children[i], target)){
           return true;
         }
       }
       return false;
     }
-  };
-  return recursiveSearch(target, this);
 };
 
 

@@ -3,41 +3,41 @@ var HashTable = function(){
   this._storage = LimitedArray(this._limit);
   for(var i = 0; i < this._limit; i++) {
     this._storage.set(i, []);
-  };
+  }
 };
 
-    //Time Complexity: O(n/k)
-HashTable.prototype.insert = function(key, val){
-  var i = getIndexBelowMaxForKey(key, this._limit);
-  var subArray = this._storage.get(i);
-  var index = subArray.reduce(function(accumulator, item, index){
+var getIndex = function(arr, key){
+  return arr.reduce(function(accumulator, item, index) {
     if(item[0] === key){
       return index;
     } else {
       return accumulator;
     }
   }, -1);
+};
+
+
+
+    //Time Complexity: O(n/k)
+HashTable.prototype.insert = function(key, val){
+  var i = getIndexBelowMaxForKey(key, this._limit);
+  var bucket = this._storage.get(i);
+  var index = getIndex(bucket, key);
   if(index !== -1) {
-    subArray[index][1] = val;
+    bucket[index][1] = val;
   } else {
-    subArray.push([key, val]);
+    bucket.push([key, val]);
   }
-    this._storage.set(i, subArray);
+    this._storage.set(i, bucket);
 };
 
     //Time Complexity: O(n/k)
 HashTable.prototype.retrieve = function(key){
   var i = getIndexBelowMaxForKey(key, this._limit);
-  var subArray = this._storage.get(i);
-  var index = subArray.reduce(function(accumulator, item, index){
-    if(item[0] === key){
-      return index;
-    } else {
-      return accumulator;
-    }
-  }, -1);
+  var bucket = this._storage.get(i);
+  var index = getIndex(bucket, key);
   if(index !== -1) {
-    return subArray[index][1];
+    return bucket[index][1];
   } else {
     return null;
   }
@@ -46,17 +46,11 @@ HashTable.prototype.retrieve = function(key){
     //Time Complexity: O(n/k)
 HashTable.prototype.remove = function(key){
   var i = getIndexBelowMaxForKey(key, this._limit);
-  var subArray = this._storage.get(i);
-  var index = subArray.reduce(function(accumulator, item, index){
-    if(item[0] === key){
-      return index;
-    } else {
-      return accumulator;
-    }
-  }, -1);
+  var bucket = this._storage.get(i);
+  var index = getIndex(bucket, key);
   if(index !== -1) {
-        subArray.splice(index, 1);
-        this._storage.set(i, subArray);
+        bucket.splice(index, 1);
+        this._storage.set(i, bucket);
   }
 };
 

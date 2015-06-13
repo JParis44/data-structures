@@ -45,15 +45,12 @@ var LinkedList = function(){
 
     //Time Complexity: O(n)
   list.contains = function(target){
-    var recursiveSearch = function(target, node){
-      if (node.value === target) {
-        return true
-      } else {
-        if (node.next === null) {return false;}
-        return recursiveSearch(target, node.next);
+      var currentNode = list.head;
+      while(currentNode) {
+        if (currentNode.value === target) {return true;}
+        currentNode = currentNode.next;
       }
-    };
-    return recursiveSearch(target, list.head);
+      return false;
   };
 
   return list;

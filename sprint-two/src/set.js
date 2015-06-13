@@ -1,7 +1,6 @@
 var Set = function(){
   var set = Object.create(setPrototype);
-  set._storage = {};
-  set.length = 0;
+  set._storage = [];
   return set;
 };
 
@@ -9,36 +8,18 @@ var setPrototype = {};
 
     //Time Complexity: O(1)
 setPrototype.add = function(item){
-  if(!this.contains(item)) {
-    this._storage[this.length] = item;
-    this.length++;
-  }
+  if(!this.contains(item)) {this._storage.push(item);}
 };
 
     //Time Complexity: O(n)
 setPrototype.contains = function(item){
-  for(var i = 0; i < this.length; i++) {
-    if(this._storage[i] === item) {
-      return true;
-    }
-  }
-  return false;
+  return !(this._storage.indexOf(item) === -1);
 };
 
     //Time Complexity: O(n)
 setPrototype.remove = function(item){
-  var copying = false;
-  for(var i = 0; i < this.length; i++) {
-    if(this._storage[i] === item) {
-      copying = true;
-    }
-    if(copying){
-      this._storage[i] = this._storage[i+1];
-    }
-  }
-  delete this._storage[this.length-1];
-  this.length--;
-
+  var index = this._storage.indexOf(item);
+  if (index !== -1) {this._storage.splice(index, 1);}
 };
 
 /*
